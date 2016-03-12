@@ -11,13 +11,15 @@ import AFNetworking
 import UIColor_Hex_Swift
 import EZLoadingActivity
 
-class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
     
     // MARK: - Attributes
     
+    @IBOutlet weak var movieCollectionView: UICollectionView!
     @IBOutlet weak var movieTableView: UITableView!
     
     let refreshControl = UIRefreshControl()
+    let collectionViewRefreshControl = UIRefreshControl()
     
     var movies = [NSDictionary]()
     var endpoint: String!
@@ -34,6 +36,12 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         refreshControl.addTarget(self, action: "refreshControlAction:", forControlEvents: .ValueChanged)
         movieTableView.insertSubview(refreshControl, atIndex: 0)
         
+        movieCollectionView.delegate = self
+        movieCollectionView.dataSource = self
+        movieCollectionView.backgroundColor = UIColor(rgba: "#F2BB60")
+        collectionViewRefreshControl.addTarget(self, action: "refreshControlAction:", forControlEvents: .ValueChanged)
+        movieCollectionView.insertSubview(collectionViewRefreshControl, atIndex: 0)
+        
         loadData()
     }
 
@@ -43,9 +51,8 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     @IBAction func onSegmentChange(sender: AnyObject) {
-        let segmentControl = sender as! UISegmentedControl
-        let selectedSegmentIndex = segmentControl.selectedSegmentIndex
-        
+        movieCollectionView.hidden = !movieCollectionView.hidden
+        movieTableView.hidden = !movieTableView.hidden
     }
     // MARK: - Methods
     
@@ -76,10 +83,12 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         data, options:[]) as? NSDictionary {
                             self.movies = responseDictionary["results"] as! [NSDictionary]
                             self.movieTableView.reloadData()
+                            self.movieCollectionView.reloadData()
                     }
                 }
                 if refreshAction {
                     self.refreshControl.endRefreshing()
+                    self.collectionViewRefreshControl.endRefreshing()
                 } else {
                     EZLoadingActivity.hide()
                 }
@@ -123,6 +132,44 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         return cell
     }
+    
+    // MARK: - UICollectionViewDataSource
+    
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return movies.count
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("movieCollectionViewCell", forIndexPath: indexPath) as! MovieCollectionViewCell
+        let movie = movies[indexPath.row]
+
+        cell.titleLabel.text = (movie["title"] as! String)
+        let baseUrl = "https://image.tmdb.org/t/p/w342"
+        
+        if let posterPath = movie["poster_path"] as? String {
+            let imageURL = baseUrl + posterPath
+            let imageRequest = NSURLRequest(URL: NSURL(string: imageURL)!)
+            cell.imageView.setImageWithURLRequest(imageRequest, placeholderImage: nil, success: { (imageRequest, imageResponse, image) -> Void in
+                if imageResponse != nil {
+                    cell.imageView.alpha = 0.0
+                    cell.imageView.image = image
+                    UIView.animateWithDuration(0.3, animations: { () -> Void in
+                        cell.imageView.alpha = 1.0
+                    })
+                } else {
+                    cell.imageView.image = image
+                }
+                }, failure: { (imageRequest, imageResponse, error) -> Void in
+                    
+            })
+            //cell.movieImageView.setImageWithURL(NSURL(string: imageURL)!)
+        }
+        return cell
+    }
 
     
     // MARK: - Navigation
@@ -132,8 +179,13 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         let movieDetailVC = segue.destinationViewController as! MovieDetailViewController
-        let indexPath = movieTableView.indexPathForCell(sender as! UITableViewCell)
-        let movie = movies[indexPath!.row]
+        let indexPath: NSIndexPath
+        if let cell = sender as? UITableViewCell {
+            indexPath = movieTableView.indexPathForCell(cell)!
+        } else {
+            indexPath = movieCollectionView.indexPathForCell(sender as! MovieCollectionViewCell)!
+        }
+        let movie = movies[indexPath.row]
         movieDetailVC.movie = movie
     }
 

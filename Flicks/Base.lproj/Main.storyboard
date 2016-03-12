@@ -76,8 +76,8 @@
                                         <rect key="frame" x="100" y="8" width="121" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <segments>
-                                            <segment title="List"/>
-                                            <segment title="Grid"/>
+                                            <segment title="" image="list"/>
+                                            <segment title="" image="grid"/>
                                         </segments>
                                         <connections>
                                             <action selector="onSegmentChange:" destination="BYZ-38-t0r" eventType="valueChanged" id="yF6-zM-8mg"/>
@@ -128,11 +128,52 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="mff-CE-bZb">
+                                <rect key="frame" x="0.0" y="106" width="320" height="414"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="MXI-0L-arx">
+                                    <size key="itemSize" width="153" height="179"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="movieCollectionViewCell" id="B82-ot-ZXg" customClass="MovieCollectionViewCell" customModule="Flicks" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="153" height="179"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="153" height="179"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aZM-a9-rGS">
+                                                    <rect key="frame" x="8" y="138" width="137" height="33"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="AAh-JO-LNm">
+                                                    <rect key="frame" x="11" y="-8" width="134" height="134"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <outlet property="imageView" destination="AAh-JO-LNm" id="m6C-mM-R3o"/>
+                                            <outlet property="titleLabel" destination="aZM-a9-rGS" id="nsa-Yd-lQg"/>
+                                            <segue destination="Aa5-DY-KTv" kind="push" id="sbb-Ok-LoB"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" red="0.94901960784313721" green="0.73333333333333328" blue="0.37647058823529411" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="tiT-0y-Mh9"/>
                     <connections>
+                        <outlet property="movieCollectionView" destination="mff-CE-bZb" id="o8t-1O-ugT"/>
                         <outlet property="movieTableView" destination="IFy-BQ-cK0" id="Ig7-wl-1jE"/>
                     </connections>
                 </viewController>
@@ -159,4 +200,11 @@
             <point key="canvasLocation" x="173" y="345"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="grid" width="24" height="24"/>
+        <image name="list" width="32" height="32"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="sbb-Ok-LoB"/>
+    </inferredMetricsTieBreakers>
 </document>
