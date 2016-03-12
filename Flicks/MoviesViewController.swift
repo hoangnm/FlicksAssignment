@@ -31,16 +31,21 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         movieTableView.delegate = self
         movieTableView.dataSource = self
-        movieTableView.backgroundColor = UIColor(rgba: "#F2BB60")
+        //movieTableView.backgroundColor = UIColor(rgba: "#F2BB60")
         
         refreshControl.addTarget(self, action: "refreshControlAction:", forControlEvents: .ValueChanged)
         movieTableView.insertSubview(refreshControl, atIndex: 0)
         
         movieCollectionView.delegate = self
         movieCollectionView.dataSource = self
-        movieCollectionView.backgroundColor = UIColor(rgba: "#F2BB60")
+        //movieCollectionView.backgroundColor = UIColor(rgba: "#F2BB60")
         collectionViewRefreshControl.addTarget(self, action: "refreshControlAction:", forControlEvents: .ValueChanged)
         movieCollectionView.insertSubview(collectionViewRefreshControl, atIndex: 0)
+        
+        let searchBar = UISearchBar()
+        searchBar.sizeToFit()
+        
+        navigationItem.titleView = searchBar
         
         loadData()
     }

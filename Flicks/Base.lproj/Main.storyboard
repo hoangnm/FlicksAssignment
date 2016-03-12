@@ -84,7 +84,7 @@
                                         </connections>
                                     </segmentedControl>
                                 </subviews>
-                                <color key="backgroundColor" red="0.94901960780000005" green="0.73333333329999995" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="133" sectionHeaderHeight="28" sectionFooterHeight="28" id="IFy-BQ-cK0">
                                 <rect key="frame" x="0.0" y="106" width="320" height="414"/>
@@ -118,7 +118,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.94901960784313721" green="0.73333333333333328" blue="0.37647058823529411" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="movieDescriptionsLabel" destination="ueM-Tm-dTI" id="Z0S-ti-kVo"/>
                                             <outlet property="movieImageView" destination="Rs4-2M-av0" id="f9G-kW-gdP"/>
@@ -169,7 +168,6 @@
                                 </cells>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" red="0.94901960784313721" green="0.73333333333333328" blue="0.37647058823529411" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="tiT-0y-Mh9"/>
                     <connections>
