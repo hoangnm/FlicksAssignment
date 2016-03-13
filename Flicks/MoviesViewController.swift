@@ -15,6 +15,7 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     // MARK: - Attributes
     
+    @IBOutlet weak var networkErrorView: UIView!
     @IBOutlet weak var movieCollectionView: UICollectionView!
     @IBOutlet weak var movieTableView: UITableView!
     
@@ -86,12 +87,19 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let task: NSURLSessionDataTask = session.dataTaskWithRequest(request,
             completionHandler: { (dataOrNil, response, error) in
                 if let data = dataOrNil {
+                    self.networkErrorView.hidden = true
+                    self.networkErrorView.alpha = 0.7
                     if let responseDictionary = try! NSJSONSerialization.JSONObjectWithData(
                         data, options:[]) as? NSDictionary {
                             self.movies = responseDictionary["results"] as! [NSDictionary]
                             self.movieTableView.reloadData()
                             self.movieCollectionView.reloadData()
                     }
+                } else {
+                    UIView.animateWithDuration(0.5, animations: { () -> Void in
+                        self.networkErrorView.alpha = 1.0
+                        self.networkErrorView.hidden = false
+                    })
                 }
                 if refreshAction {
                     self.refreshControl.endRefreshing()

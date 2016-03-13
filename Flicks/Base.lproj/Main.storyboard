@@ -179,12 +179,27 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <view hidden="YES" alpha="0.69999999999999996" contentMode="scaleToFill" id="DzO-xV-Es7">
+                                <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Network error" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="z7D-QK-COr">
+                                        <rect key="frame" x="107" y="11" width="106" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                     </view>
                     <navigationItem key="navigationItem" id="tiT-0y-Mh9"/>
                     <connections>
                         <outlet property="movieCollectionView" destination="mff-CE-bZb" id="o8t-1O-ugT"/>
                         <outlet property="movieTableView" destination="IFy-BQ-cK0" id="Ig7-wl-1jE"/>
+                        <outlet property="networkErrorView" destination="DzO-xV-Es7" id="Ukv-Mx-CX9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
