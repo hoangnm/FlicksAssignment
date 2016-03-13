@@ -8,7 +8,6 @@
 
 import UIKit
 import AFNetworking
-import UIColor_Hex_Swift
 import EZLoadingActivity
 
 class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate  {
@@ -25,7 +24,8 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var movies = [NSDictionary]()
     var filtered = [NSDictionary]()
     var endpoint: String!
-
+    var searchActive = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -205,6 +205,7 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        
         if(searchText.isEmpty) {
             loadData()
         } else {

@@ -5,7 +5,6 @@ use_frameworks!
 
 target 'Flicks' do
 pod 'AFNetworking', '~> 3.0'
-pod 'UIColor_Hex_Swift', '~> 1.9'
 pod 'EZLoadingActivity'
 end
 

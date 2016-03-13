@@ -17,8 +17,9 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet weak var overviewLabel: UILabel!
     @IBOutlet weak var movieImageView: UIImageView!
     @IBOutlet weak var overviewScrollView: UIScrollView!
+    @IBOutlet weak var releaseDateLabel: UILabel!
     @IBOutlet weak var toggleInfoButton: UIButton!
-    
+
     var infoToggled = false
     
     var movie: NSDictionary!
@@ -34,6 +35,9 @@ class MovieDetailViewController: UIViewController {
         
         let overview = movie["overview"] as! String
         overviewLabel.text = overview
+        
+        let releaseDate = movie["release_date"] as! String
+        releaseDateLabel.text = releaseDate
         
         let baseUrl = "https://image.tmdb.org/t/p/w342"
         

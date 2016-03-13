@@ -15,16 +15,13 @@ PODS:
   - AFNetworking/UIKit (3.0.4):
     - AFNetworking/NSURLSession
   - EZLoadingActivity (0.8)
-  - UIColor_Hex_Swift (1.9)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
   - EZLoadingActivity
-  - UIColor_Hex_Swift (~> 1.9)
 
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
   EZLoadingActivity: 6fd75a05765a4085f4b6fef6f62edf9f144b3139
-  UIColor_Hex_Swift: 2ee747c0fed8b72b2135ef474b80a6921e489daa
 
 COCOAPODS: 0.39.0

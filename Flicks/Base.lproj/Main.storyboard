@@ -22,11 +22,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="yB7-bC-pL2">
-                                        <rect key="frame" x="8" y="80" width="304" height="86"/>
+                                        <rect key="frame" x="8" y="96" width="304" height="74"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overview" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Gz6-1P-TdU">
-                                                <rect key="frame" x="0.0" y="0.0" width="304" height="86"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="304" height="74"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -35,14 +35,14 @@
                                         </subviews>
                                     </scrollView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="loB-40-jWS">
-                                        <rect key="frame" x="8" y="46" width="304" height="27"/>
+                                        <rect key="frame" x="8" y="33" width="304" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
                                         <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="R1z-sv-C4a">
-                                        <rect key="frame" x="125" y="7" width="56" height="32"/>
+                                        <rect key="frame" x="125" y="0.0" width="56" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" image="arrowup">
@@ -51,6 +51,20 @@
                                         <connections>
                                             <action selector="upClick:" destination="Aa5-DY-KTv" eventType="touchUpInside" id="zI2-Uh-9p5"/>
                                         </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Release Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Zvm-nN-xY3" userLabel="Release Date Label">
+                                        <rect key="frame" x="53" y="67" width="101" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="sb1-Jj-tSt">
+                                        <rect key="frame" x="26" y="64" width="25" height="25"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="calendar">
+                                            <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -64,6 +78,7 @@
                         <outlet property="movieImageView" destination="L2a-FO-UgZ" id="sYF-kR-Igx"/>
                         <outlet property="overviewLabel" destination="Gz6-1P-TdU" id="Qvd-0e-mfX"/>
                         <outlet property="overviewScrollView" destination="yB7-bC-pL2" id="Cm9-cb-O3V"/>
+                        <outlet property="releaseDateLabel" destination="Zvm-nN-xY3" id="4Yk-bM-a5E"/>
                         <outlet property="titleLabel" destination="loB-40-jWS" id="iTl-sv-Bbp"/>
                         <outlet property="toggleInfoButton" destination="R1z-sv-C4a" id="Yh7-VQ-cZH"/>
                     </connections>
@@ -227,6 +242,7 @@
     </scenes>
     <resources>
         <image name="arrowup" width="48" height="48"/>
+        <image name="calendar" width="48" height="48"/>
         <image name="grid" width="24" height="24"/>
         <image name="list" width="32" height="32"/>
     </resources>
