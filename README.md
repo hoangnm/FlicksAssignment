@@ -38,11 +38,11 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+Using AFNetworking, EZLoadingActivity library.
 
 ## License
 
-    Copyright [2-16] [hoangnguyen]
+    Copyright 2016 hoangnguyen
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
