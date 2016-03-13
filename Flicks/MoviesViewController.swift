@@ -11,7 +11,7 @@ import AFNetworking
 import UIColor_Hex_Swift
 import EZLoadingActivity
 
-class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
+class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate  {
     
     // MARK: - Attributes
     
@@ -22,6 +22,7 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     let collectionViewRefreshControl = UIRefreshControl()
     
     var movies = [NSDictionary]()
+    var filtered = [NSDictionary]()
     var endpoint: String!
 
     override func viewDidLoad() {
@@ -43,7 +44,8 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         movieCollectionView.insertSubview(collectionViewRefreshControl, atIndex: 0)
         
         let searchBar = UISearchBar()
-        searchBar.sizeToFit()
+        //searchBar.sizeToFit()
+        searchBar.delegate = self
         
         navigationItem.titleView = searchBar
         
@@ -175,7 +177,56 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         return cell
     }
-
+    
+    // MARK: - UISearchbarDelegate
+    
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
+    
+    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(false, animated: true)
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        if(searchText.isEmpty) {
+            loadData()
+        } else {
+            let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
+            let url = NSURL(string: "https://api.themoviedb.org/3/search/movie?api_key=\(apiKey)&query=\(searchText)")
+            let request = NSURLRequest(
+                URL: url!,
+                cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData,
+                timeoutInterval: 10)
+            
+            let session = NSURLSession(
+                configuration: NSURLSessionConfiguration.defaultSessionConfiguration(),
+                delegate: nil,
+                delegateQueue: NSOperationQueue.mainQueue()
+            )
+            
+            let task: NSURLSessionDataTask = session.dataTaskWithRequest(request,
+                completionHandler: { (dataOrNil, response, error) in
+                    if let data = dataOrNil {
+                        if let responseDictionary = try! NSJSONSerialization.JSONObjectWithData(
+                            data, options:[]) as? NSDictionary {
+                                self.movies = responseDictionary["results"] as! [NSDictionary]
+                                self.movieTableView.reloadData()
+                                self.movieCollectionView.reloadData()
+                        }
+                    }
+            })
+            task.resume()
+        }
+    }
     
     // MARK: - Navigation
 
