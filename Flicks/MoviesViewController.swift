@@ -24,7 +24,6 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var movies = [NSDictionary]()
     var filtered = [NSDictionary]()
     var endpoint: String!
-    var searchActive = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +32,6 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         movieTableView.delegate = self
         movieTableView.dataSource = self
-        //movieTableView.backgroundColor = UIColor(rgba: "#F2BB60")
         
         refreshControl.addTarget(self, action: "refreshControlAction:", forControlEvents: .ValueChanged)
         movieTableView.insertSubview(refreshControl, atIndex: 0)
@@ -45,7 +43,7 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         movieCollectionView.insertSubview(collectionViewRefreshControl, atIndex: 0)
         
         let searchBar = UISearchBar()
-        //searchBar.sizeToFit()
+        searchBar.searchBarStyle = .Prominent
         searchBar.delegate = self
         
         navigationItem.titleView = searchBar
