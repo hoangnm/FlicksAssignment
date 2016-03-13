@@ -49,37 +49,30 @@ class MovieDetailViewController: UIViewController {
     }
     
     @IBAction func upClick(sender: AnyObject) {
+        let heightToggle: CGFloat = 120
         if(!infoToggled) {
             UIView.animateWithDuration(0.3) { () -> Void in
                 self.toggleInfoButton.setImage(UIImage(named: "arrowdown"), forState: .Normal)
-                //let originOverviewLabelY = self.overviewLabel.frame.origin.y + self.overviewLabel.frame.size.height
-                self.infoView.frame.origin.y = 180
+                self.infoView.frame.origin.y = self.infoView.frame.origin.y - heightToggle
                 var newFrame = self.infoView.frame
-                newFrame.size.height = 568 - 180
+                newFrame.size.height += heightToggle
                 self.infoView.frame = newFrame
                 self.overviewLabel.numberOfLines = 0
                 self.overviewLabel.sizeToFit()
-                //self.overviewLabel.frame.size.height = 300
-                self.overviewScrollView.frame.size.height += 180
-                //self.overviewScrollView.contentSize = CGSize(width: self.overviewScrollView.frame.size.width, height: self.overviewLabel.frame.size.height)
-                // print(originOverviewLabelY)
-                // print(self.overviewScrollView.frame.origin.y)
+                self.overviewScrollView.frame.size.height += heightToggle
+                self.overviewScrollView.contentSize = CGSize(width: self.overviewScrollView.frame.size.width, height: self.overviewLabel.frame.size.height)
             }
         } else {
             UIView.animateWithDuration(0.3) { () -> Void in
                 self.toggleInfoButton.setImage(UIImage(named: "arrowup"), forState: .Normal)
-                //let originOverviewLabelY = self.overviewLabel.frame.origin.y + self.overviewLabel.frame.size.height
-                self.infoView.frame.origin.y = 356
+                self.infoView.frame.origin.y += heightToggle
                 var newFrame = self.infoView.frame
-                newFrame.size.height = 167
+                newFrame.size.height -= heightToggle
                 self.infoView.frame = newFrame
                 self.overviewLabel.numberOfLines = 3
                 self.overviewLabel.sizeToFit()
-                //self.overviewLabel.frame.size.height = 300
-                self.overviewScrollView.frame.size.height = 86
-                //self.overviewScrollView.contentSize = CGSize(width: self.overviewScrollView.frame.size.width, height: self.overviewLabel.frame.size.height)
-                // print(originOverviewLabelY)
-                // print(self.overviewScrollView.frame.origin.y)
+                self.overviewScrollView.frame.size.height -= heightToggle
+                self.overviewScrollView.contentSize = CGSize(width: self.overviewScrollView.frame.size.width, height: self.overviewLabel.frame.size.height)
             }
         }
         infoToggled = !infoToggled
